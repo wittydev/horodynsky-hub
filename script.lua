@@ -142,17 +142,19 @@ spawn(function()
     print('poo')
     while wait(1) do
         if riftautofarm == true then
+
+
             if riftgui.Enabled == true then
                 local PlayerCar = getplrcar(game.Players.LocalPlayer)
+
                 tpcar(riftgui.Adornee.Position + Vector3.new(0,25,0),PlayerCar)
                 wait(12)
 
                 tpcar(riftgui.Adornee.Position + Vector3.new(0,25,0),PlayerCar)
                 wait(3)
-                
-                if riftgui.Enabled == false then -- sometimes the game fucks up and keeps it in a frozen state. this fixes
-                    l__PassengerEvent__15:FireServer("jump");
-                end
+            end
+            if riftgui.Enabled == false then -- sometimes the game fucks up and keeps it in a frozen state. this fixes
+                l__PassengerEvent__15:FireServer("jump");
             end
         end
     end
