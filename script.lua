@@ -134,51 +134,29 @@ local temptp
 local tempabrev
 
 
-spawn(pcall(function()
+spawn(function()
     local PassengerSpanws = game.ReplicatedStorage.PassengerSpawns
     local PassengerDestinations = game.ReplicatedStorage.PassengerDestinations
     local riftgui = game.Players.LocalPlayer.PlayerGui.RiftGui
+    local l__PassengerEvent__15 = game.ReplicatedStorage:WaitForChild("PassengerEvent");
     print('poo')
     while wait(1) do
         if riftautofarm == true then
             if riftgui.Enabled == true then
-                local screengui = game.Players.LocalPlayer.PlayerGui:FindFirstChild('RiftAutofarm')
-                local StatusLabel
-
                 local PlayerCar = getplrcar(game.Players.LocalPlayer)
+                tpcar(riftgui.Adornee.Position + Vector3.new(0,25,0),PlayerCar)
+                wait(12)
+
+                tpcar(riftgui.Adornee.Position + Vector3.new(0,25,0),PlayerCar)
+                wait(3)
                 
-                if screengui ~= nil then
-                    screengui:Destroy()
+                if riftgui.Enabled == false then -- sometimes the game fucks up and keeps it in a frozen state. this fixes
+                    l__PassengerEvent__15:FireServer("jump");
                 end
-
-                screengui = Instance.new('ScreenGui')
-                screengui.Parent = game.Players.LocalPlayer.PlayerGui
-
-                StatusLabel = Instance.new('TextLabel')
-                StatusLabel.Parent = screengui
-                StatusLabel.BackgroundTransparency = 1
-                StatusLabel.TextScaled = true
-                StatusLabel.Text = "Status:"
-                StatusLabel.Size = UDim2.new(1,0,.05,0)
-                StatusLabel.Position = UDim2.new(0,0,.95,0)
-                StatusLabel.Font = Enum.Font.SourceSansBold
-                StatusLabel.TextColor3 = Color3.fromRGB(255,255,255)
-                screengui.Name = "RiftAutofarm"
-                
-                StatusLabel.Text = "Status: Picking up"
-                tpcar(riftgui.Adornee.Position + Vector3.new(0,5,0),PlayerCar)
-                wait(1)
-                StatusLabel.Text = "Status: Waiting"
-                wait(10)
-                StatusLabel.Text = "Status: Dropping Off"
-
-                wait(1)
-                tpcar(riftgui.Adornee.Position + Vector3.new(0,5,0),PlayerCar)
-                StatusLabel.Text = "Status: Waiting"
             end
         end
     end
-end))
+end)
 
 spawn(pcall(function()
     print('poo')
